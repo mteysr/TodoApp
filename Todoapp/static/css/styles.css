@@ -1,0 +1,48 @@
+.navbar {
+    padding: var(--navbar-padding-y, 1rem) var(--navbar-padding-x, 1rem);
+    color: var(--navbar-color, #000);
+    
+    .navbar-brand {
+      padding: var(--navbar-brand-padding-y, 0.5rem) 0;
+      margin-right: var(--navbar-brand-margin-end, 1rem);
+      font-size: var(--navbar-brand-font-size, 1.25rem);
+      color: var(--navbar-brand-color, #000);
+      
+      &:hover {
+        color: var(--navbar-brand-hover-color, #0056b3);
+      }
+    }
+  
+    .navbar-nav .nav-link {
+      padding-right: var(--navbar-nav-link-padding-x, 0.5rem);
+      padding-left: var(--navbar-nav-link-padding-x, 0.5rem);
+      color: var(--navbar-color, #000);
+  
+      &:hover {
+        color: var(--navbar-hover-color, #0056b3);
+      }
+  
+      &.active {
+        color: var(--navbar-active-color, #000);
+      }
+  
+      &.disabled {
+        color: var(--navbar-disabled-color, #6c757d);
+      }
+    }
+  
+    .navbar-toggler {
+      padding: var(--navbar-toggler-padding-y, 0.25rem) var(--navbar-toggler-padding-x, 0.75rem);
+      font-size: var(--navbar-toggler-font-size, 1.25rem);
+      background-image: var(--navbar-toggler-icon-bg, url('data:image/svg+xml,...'));
+      border-color: var(--navbar-toggler-border-color, #ddd);
+      border-radius: var(--navbar-toggler-border-radius, 0.25rem);
+      transition: var(--navbar-toggler-transition, all 0.15s ease-in-out);
+  
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 var(--navbar-toggler-focus-width, 0.2rem) rgba(0, 123, 255, 0.25);
+      }
+    }
+  }
+  

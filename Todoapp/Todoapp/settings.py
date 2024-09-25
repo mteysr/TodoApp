@@ -26,12 +26,15 @@ SECRET_KEY = 'django-insecure-+x#y7l2h^3+-b=b=@#y=sk*z#=emb_fho1re7u_c)&p!ojuukv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+LOGIN_URL = 'login'
+
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'utils.apps.UtilsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,7 +59,7 @@ ROOT_URLCONF = 'Todoapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR,  'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,6 +124,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
