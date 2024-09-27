@@ -1,163 +1,187 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+:root {
+  --space-root: 1rem;
+  --space-xs: calc(var(--space-root) / 2);
+  --space-s: calc(var(--space-root) / 1.5);
+  --space-m: var(--space-root);
+  --space-l: calc(var(--space-root) * 1.5);
+  --space-xl: calc(var(--space-root) * 2);
+  --color-primary: mediumslateblue;
+  --color-secondary: black;
+  --color-text: #666;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-text);
+  perspective: 1000px; /* 3D perspektif */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Tam ekran yerleştirme */
+  margin: 0;
+  background-color: #f0f0f0; /* Arka plan rengi */
+}
+
+form {
+  max-width: 400px;
+  width: 100%;
+  padding: var(--space-l);
+  border-radius: 1rem; /* Köşe yuvarlatma */
+  background: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1); /* Gölge ekleyerek 3D görünüm */
+  transform: rotateY(-15deg) rotateX(10deg); /* 3D dönüşüm */
+  transition: transform 0.5s ease, box-shadow 0.5s ease; /* Yumuşak geçişler */
+}
+
+form:hover {
+  transform: rotateY(0deg) rotateX(0deg); /* Hover anında düz görünüm */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 8px 10px rgba(0, 0, 0, 0.1); /* Hover'da gölgeyi artır */
+}
+
+.form-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
+}
+
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.input-group {
+  position: relative;
+}
+
+input {
+  width: 100%;
+  padding: var(--space-s) var(--space-m);
+  padding-left: calc(var(--space-m) * 2.5);
+  font-size: 1rem;
+  color: var(--color-secondary);
+  border: 1px solid var(--color-text);
+  border-radius: 0.5rem;
+  background: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* İç gölge */
+}
+
+input:focus {
+  outline-color: var(--color-primary);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Focus durumunda iç gölgeyi artır */
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: var(--space-m);
+  width: 1.25rem;
+  height: 1.25rem;
+  transform: translateY(-50%);
+  color: var(--color-text);
+}
+
+.icon svg {
+  fill: currentColor;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--space-s) var(--space-xl);
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background-color: var(--color-primary);
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Buton gölgesi */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  background-color: darkslateblue;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Hover'da buton gölgesi */
+}
+
+.btn--text {
+  background: none;
+  color: var(--color-primary);
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: darkslateblue;
+}
 
 
-{% load static %}
 
+</style>
 
+<form  autocomplete="off" class="form" method="post">
+  {% csrf_token %} 
+  <div class="form-inner">
+    <h2>User Login</h2>
 
-<link href="{% static 'css/styles1.css' %}" rel="stylesheet">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<div class="container-fluid" >
-    <div class="login-signup">
-      <div class="row">
-        <div class="col-sm-6 nav-tab-holder">
-        <ul class="nav nav-tabs row" role="tablist">
-          <li role="presentation" class="active col-sm-6"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Sign up</a></li>
-          <li role="presentation" class="col-sm-6"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Login</a></li>
-        </ul>
+    <div class="input-wrapper">
+      <label for="login-username">Username</label>
+      <div class="input-group">
+        <span class="icon">
+          <svg viewBox="0 0 24 24">
+            <!-- SVG Icon -->
+          </svg>
+        </span>
+        <input type="text" id="login-username" name="username" required data-lpignore="true">
       </div>
+    </div>
 
+    <div class="input-wrapper">
+      <label for="login-password">Password</label>
+      <div class="input-group">
+        <span class="icon">
+          <svg viewBox="0 0 24 24">
+            <!-- SVG Icon -->
+          </svg>
+        </span>
+        <input type="password" id="login-password" name="password" required data-lpignore="true">
       </div>
+    </div>
 
-
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="home">
-          <div class="row">
-
-            <div class="col-sm-6 mobile-pull">
-              <article role="login">
-                <h3 class="text-center"><i class="fa fa-lock"></i>USER</h3>
-                <form class="signup" method="post"> <!-- action kısmı değiştirilecek  TODO -->
-                  {% csrf_token %}
-                  <div class="form-group">
-                      <input type="text" class="form-control" name="name" placeholder="Name">  
-                  </div>
-                  <div class="form-group">
-                      <input type="text" class="form-control" name="last_name" placeholder="Last Name">  
-                  </div>
-                  <div class="form-group">
-                      <input type="email" class="form-control" name="email" placeholder="Email Address">  
-                  </div>
-                  <div class="form-group">
-                      <input type="password" class="form-control" name="password" placeholder="Password">  <!-- name özniteliği eklendi eklenmediğinde backend den alınamadı -->
-                  </div>
-                  <div class="form-group">
-                      <input type="submit" class="btn btn-success btn-block" value="SUBMIT">
-                  </div>
-              </form>
-              
-                <footer role="signup" class="text-center">
-                  <ul>
-                    <li>
-                      <a href="#">Terms of Use</a>
-                    </li>
-                    <li>
-                      <a href="#">Privacy Statement</a>
-                    </li>
-                  </ul>
-                </footer>
-
-              </article>
-            </div>
-
-            <!-- <div class="col-sm-6">
-              <article role="manufacturer"  class="text-center">
-                <header>
-                  ADMIN
-                </header>
-                <h1>FREE</h1>
-                <ul class="text-left">
-                  <li><i class="fa fa-check"></i>  </li>
-                  <li><i class="fa fa-check"></i>  Create Project Lists</li>
-                  <li><i class="fa fa-check"></i>  Create Project Lists</li>
-                  <li><i class="fa fa-check"></i>  Share Files</li>
-                  <li><i class="fa fa-check"></i>   Unlimited  access</li>
-                  <li><i class="fa fa-check"></i>  Unlimited  access</li>
-                </ul>
-                <a href="#" class="btn btn-success">SignUp  For Admin</a>
-              </article>
-            </div> -->
-
-          </div>
-          <!-- end of row -->
-        </div>
-        <!-- end of home -->
-
-<!-- ------------------------------------------------------------------------------------- -->
-<!-- ------------------------------------------------------------------------------------- -->
-<!-- ------------------------------------------------------------------------------------- -->
-<!-- ------------------------------------------------------------------------------------- -->
-<!-- ------------------------------------------------------------------------------------- -->
-<!-- ------------------------------------------------------------------------------------- -->
-<!-- ------------------------------------------------------------------------------------- -->
-
-      <div role="tabpanel" class="tab-pane" id="profile">
-        <div class="row">
-
-          <div class="col-sm-6 mobile-pull">
-            <article role="login">
-              <h3 class="text-center"><i class="fa fa-lock"></i> Create User Account</h3>
-              <form class="signup" action="index.html" method="post">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="UserName">
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" placeholder="Email Address">
-                </div>
-         
-                <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Confirm Password">
-                </div>
-                <div class="form-group">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Please accept the terms and conditions to proceed with your request.
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input type="submit" class="btn btn-success btn-block"  value="SUBMIT">
-                </div>
-              </form>
-              <footer role="signup" class="text-center">
-                <ul>
-                  <li>
-                    <a href="#">Terms of Use</a>
-                  </li>
-                  <li>
-                    <a href="#">Privacy Statement</a>
-                  </li>
-                </ul>
-              </footer>
-
-            </article>
-          </div>
-
-            <div class="col-sm-6">
-            <article role="manufacturer"  class="text-center">
-              <header>
-                USER
-              </header>
-              <h1>FREE</h1>
-              <ul class="text-left">
-                <li><i class="fa fa-check"></i>  Unlimited Site Access</li>
-                <li><i class="fa fa-check"></i>   Unlimited Site Access</li>
-                <li><i class="fa fa-check"></i>  Unlimited Site Access</li>
-                <li><i class="fa fa-check"></i>  Unlimited Site Access</li>
-                <li><i class="fa fa-check"></i>   Unlimited Site Access</li>
-                <li><i class="fa fa-check"></i>   Unlimited Site Access</li>
-              </ul>
-
-              <a href="#" class="btn btn-success">SignUp  For User</a>
-            </article>
-          </div>
-        </div>
-      </div>
+    <div class="btn-group">
+      <button class="btn btn--primary" type="submit">Sign in</button>
+      <a href="{%url 'accounts:register' %}" class="btn--text"> Don't you have an account?</a>
+    </div>
   </div>
-  </div>
+</form>
+
