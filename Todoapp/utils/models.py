@@ -1,12 +1,14 @@
 from django.db import models
+from accounts.models import User
 
-# Create your models here.
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+class Todo(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    due_date = models.DateField(null=True, blank=True)
+    priority = models.CharField(max_length=10, choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')])
+    category = models.CharField(max_length=50)
+    user = models.ForeignKey('accounts.user', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    completed = models.BooleanField(default=False)

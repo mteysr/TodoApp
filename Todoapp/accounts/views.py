@@ -23,16 +23,15 @@ def login_view(request):
         tmp_name = request.POST.get('username')
         tmp_password = request.POST.get('password')
         user = custom_authenticate(tmp_name, tmp_password)
-       
-        if user is not None:
-            print("Kullanici dogrulandi")
 
-            login(request, user)
-            messages.success(request, f"Welcome back, {tmp_name}!")
-            
-            return redirect('index')  
+
+        if user is not None:
+
+            print("Kullanici dogrulandi")
+            login(request, user)            
+            return redirect('index') 
         else:
-            messages.error(request, "Invalid username or password")
+            print("Kullanici dogrulanamadi")
     return render(request, "login.html")
 
 def register_view(request):

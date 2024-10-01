@@ -25,8 +25,10 @@ SECRET_KEY = 'django-insecure-+x#y7l2h^3+-b=b=@#y=sk*z#=emb_fho1re7u_c)&p!ojuukv
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+LOGIN_REDIRECT_URL = '/'  # Oturum açma sonrası yönlendirme
+  # Giriş yapmayan kullanıcıların yönlendirileceği URL
 
-LOGIN_URL = 'login'
+AUTH_USER_MODEL = 'accounts.User'
 
 ALLOWED_HOSTS = []
 
@@ -104,6 +106,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 
 # Internationalization
